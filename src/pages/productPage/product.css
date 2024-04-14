@@ -1,0 +1,109 @@
+.productPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding-top: 40px;
+    position: relative;
+}
+.productPage .circle{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    z-index: -1;
+    left: -125px;
+    top: -125px;
+}
+.productPage .back_btn{
+    position: absolute;
+    color: white;
+    top: 31.25px;
+    left: 31.25px;
+    cursor: pointer;
+}
+.productPage .product_img img{
+    width: 250px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+.productPage .product_details{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.productPage .product_details h2{
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.productPage .product_details p{
+    font-size: 14px;
+}
+.productPage .product_details .quantity{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productPage .product_details .quantity span{
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    user-select: none;
+}
+.productPage .product_details .quantity p{
+    font-weight: bold;
+    user-select: none;
+}
+
+.productPage .product_details button{
+    user-select: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -ms-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+}
+
+.productPage .product_details button:hover{
+    background-color: #fd3d11;
+}
+
+@media screen and (max-width:768px) {
+    .productPage {
+        flex-direction: column;
+    }
+    .productPage .product_img img{
+        width: 200px;
+    }
+    .productPage .circle{
+        width: 200px;
+        height: 200px;
+        left: -100px;
+        top: -100px;
+    }
+    .productPage .back_btn{
+        top: 25px;
+        left: 25px;
+    }
+}
