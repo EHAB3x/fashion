@@ -71,7 +71,7 @@ const Cart = () => {
                   <p id="price">{Number(product.product.price) * Number(product.quantity)}$</p>
                   <p>{product.quantity}</p>
                 </div>
-                <span></span>
+                <span className="empty__span"></span>
                 <span 
                   className="delete_item"
                   onClick={()=> deleteItem(product.product.id)}
@@ -83,7 +83,7 @@ const Cart = () => {
           })}
         </div>
         
-        <div id="total">Total Price: {total}$</div>
+        <div id="total">Total Price: {total.toFixed(2)}$</div>
 
         <button id="checkout-btn">Proceed to Payment</button>
     </div>
