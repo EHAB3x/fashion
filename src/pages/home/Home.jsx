@@ -12,31 +12,16 @@ import baseUrl from "../../variables/variables";
 import axios from "axios";
 
 const Home = () => {
-  const [count, setCount] = useState(0);
-  const user = JSON.parse(window.localStorage.getItem("user"))?.data; // Added ?.data to handle potential null
+  const user = JSON.parse(window.localStorage.getItem("user"))?.data;
   const dispatch = useDispatch();
-
+  const [count, setCount] = useState(0);
   useEffect(() => {
     if (user) {
       dispatch(addUser(user));
     }
   }, [dispatch, user]);
 
-  useEffect(() => {
-    if (user) {
-      fetch(`${baseUrl}/Cart/count`, {
-        method: "GET",
-        headers: {
-          'Authorization': 'Bearer ' + user.token
-        }
-      })
-      .then(res => res.json())
-      .then(data => setCount(data))
-      .catch(error => console.error('Error fetching cart count:', error));
-    }
-  }, [user]);
-
-  console.log(user);
+  console.log(count);
   
   return (
     <>

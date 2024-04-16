@@ -10,7 +10,7 @@ import baseUrl from "../../variables/variables";
 
 const Product = () => {
     const [product, setProduct] = useState({});
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [stockQuantity, setStockQuantity] = useState(0);
     const userToken = useSelector(state => state.user[0].token);
     const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Product = () => {
                 }}
                 />
             </span>
-            <p className="quantity_number">{quantity }</p>
+            <p className="quantity_number">{quantity}</p>
             <span className="minus">
               <CiSquarePlus 
                 size="28"

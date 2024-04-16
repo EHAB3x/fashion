@@ -19,14 +19,21 @@ const Cart = () => {
         })
       })
       .then(res => res.json())
-      .then(data => setProducts(data.data))
+      .then(data => {
+        setProducts(data.data)
+        let productsArray = data.data;
 
-      document.querySelectorAll('#price').forEach(element => {
-        let total = 0;
-        total += Number(element.innerHTML.replace('$', ''));
-        setTotal(total);
-      });
-    },[userToken, reFetch])
+        let totalPrice = 0;
+        productsArray.forEach((product) => {
+            const price = product.product.price;
+            const quantity = product.quantity;
+            totalPrice += price * quantity;
+        });
+        setTotal(totalPrice);
+
+
+      })
+    },[userToken, reFetch, total])
     function deleteItem(productId){
       fetch(`${baseUrl}Cart/removefromcart/${productId}`,{
         method: "post", 
