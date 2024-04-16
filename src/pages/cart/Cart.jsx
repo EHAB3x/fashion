@@ -68,8 +68,8 @@ const Cart = () => {
                 <div className="details">
                   <h3>{product.product.title}</h3>
                   <p>{product.product.description}</p>
-                  <p id="price">{Number(product.product.price) * Number(product.quantity)}$</p>
-                  <p>{product.quantity}</p>
+                  <p id="price">Price: {Number(product.product.price) * Number(product.quantity)}$</p>
+                  <p>Quantity: {product.quantity}</p>
                 </div>
                 <span className="empty__span"></span>
                 <span 
