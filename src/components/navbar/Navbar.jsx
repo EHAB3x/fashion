@@ -7,7 +7,7 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-const Navbar = ({cartCount}) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
   useEffect(()=>{
@@ -46,7 +46,7 @@ const Navbar = ({cartCount}) => {
             </div>
             <div className="icon d-flex" onClick={()=> user.length > 0 ? navigate('/cart') : navigate(`/log`) }>
               <IoCartOutline />
-              <p className="class-btn">{cartCount.data}</p>
+              <p className="class-btn">0</p>
             </div>
           </div>
 
