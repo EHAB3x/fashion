@@ -15,6 +15,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../RTK/Slices/userSlice";
+import baseUrl from "../../variables/variables";
 const Log = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -93,7 +94,7 @@ const handleRegister = (e)=>{
       },
     });
   }else{
-    axios.post("http://fashion.somee.com/api/Auth/register",{
+    axios.post(`${baseUrl}Auth/register`,{
       firstName,
       lastName,
       userName,
@@ -101,6 +102,7 @@ const handleRegister = (e)=>{
       password
     }).then(res => {
       dispatch(addUser(res.data))
+      window.localStorage.setItem("user", JSON.stringify(res));
       setFirstName('')
       setLastName('')
       setUsername('')
@@ -155,10 +157,11 @@ const handleLogin = (e)=>{
       },
     });
   }else{
-    axios.post("http://fashion.somee.com/api/Auth/token",{
+    axios.post(`${baseUrl}Auth/token`,{
       email: loginEmail,
       password: loginPassword,
     }).then(res => {
+      window.localStorage.setItem("user", JSON.stringify(res));
       dispatch(addUser(res.data))
       setLoginEmail('')
       setLoginPassword('')

@@ -5,36 +5,35 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import baseUrl from "../../variables/variables";
 
 
 const Product = () => {
     const [product, setProduct] = useState({});
-    const [quantity, setQuantity] = useState(1);
-    const [value, setValue] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const [stockQuantity, setStockQuantity] = useState(0);
+    const userToken = useSelector(state => state.user[0].token);
     const navigate = useNavigate();
     document.documentElement.scrollTop = 0;
     const { productID } = useParams();
-    const userToken = useSelector(state => state.user[0].token);
     useEffect(()=>{
-      axios.get(`http://fashion.somee.com/api/Product/GetProduct/${productID}`)
-      .then(res=> setProduct(res.data.data));
-      let quant = product.stockQuantity;
-      setQuantity(quant)
-    },[productID,product.stockQuantity])
+      axios.get(`${baseUrl}Product/GetProduct/${productID}`)
+      .then(res=> {
+        setProduct(res.data.data)
+        setQuantity(res.data.data.stockQuantity);
+        setStockQuantity(res.data.data.stockQuantity);
+      });
+    },[productID])
+
     const addToCart = ()=>{
-      fetch(`http://fashion.somee.com/api/Cart/addtocart/${productID}`,{
-        method:"post",
-        headers : new Headers({
-          'Authorization' : 'Bearer ' + userToken
+      let value;
+      quantity >= stockQuantity ? value = quantity  - stockQuantity : value = stockQuantity - quantity;
+      fetch(`${baseUrl}Product/${productID}/${value}`,{
+        method:"put",
+        headers: new Headers({
+          'Authorization': `Berar +${userToken}`
         })
       });
-
-      fetch(`http://fashion.somee.com/api/Product/${productID}/${value}`,{
-        method:"put",
-        headers : new Headers({
-          'Authorization' : 'Bearer ' + userToken
-        })
-      })
     }
   return (
     <div className="productPage">
@@ -57,18 +56,16 @@ const Product = () => {
               <CiSquareMinus 
                 size="28"
                 onClick={()=> {
-                  quantity !== 1 && setQuantity(quantity - 1)
-                  setValue(value + 1);
+                  quantity > 1 && setQuantity(quantity - 1);
                 }}
                 />
             </span>
-            <p className="quantity_number">{quantity}</p>
+            <p className="quantity_number">{quantity }</p>
             <span className="minus">
               <CiSquarePlus 
                 size="28"
                 onClick={()=> {
-                  setQuantity(quantity + 1)
-                  setValue(value - 1);
+                  setQuantity(quantity + 1);
                 }}
               />
             </span>

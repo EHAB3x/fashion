@@ -6,9 +6,10 @@ import { CiSearch, CiUser } from "react-icons/ci";
 import { BiMenuAltRight } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-const Navbar = () => {
+import { useSelector } from 'react-redux';
+const Navbar = ({cartCount}) => {
   const navigate = useNavigate();
-
+  const user = useSelector(state => state.user);
   useEffect(()=>{
     const navList = document.querySelector(".nav-list");
     document.querySelector(".hamburger").onclick = () => {
@@ -43,9 +44,9 @@ const Navbar = () => {
             <div className="icon user-icon d-flex">
               <Link to={"/log"}><CiUser /></Link>
             </div>
-            <div className="icon d-flex" onClick={()=> navigate('/cart')}>
+            <div className="icon d-flex" onClick={()=> user.length > 0 ? navigate('/cart') : navigate(`/log`) }>
               <IoCartOutline />
-              <p className="class-btn">0</p>
+              <p className="class-btn">{cartCount.data}</p>
             </div>
           </div>
 

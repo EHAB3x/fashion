@@ -3,18 +3,21 @@ import "./collection.css"
 import axios from "axios";
 import { CiHeart, CiStar } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../../variables/variables";
+import { useSelector } from "react-redux";
+
 const Collection = () => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState("");
     const [loader, setLoader] = useState(true);
-
+    const user = useSelector(state => state.user);
     const navigate = useNavigate();
     useEffect(()=>{
-        axios.get("http://fashion.somee.com/api/Category")
+        axios.get(`${baseUrl}/Category`)
         .then(res => setCategories(res.data.data));
     
-        axios.get(`http://fashion.somee.com/api/Product${category !== "" ? `/${category}` : ""}`)
+        axios.get(`${baseUrl}Product${category !== "" ? `/${category}` : ""}`)
         .then(res => {
           setProducts(res.data.data)
           setLoader(false)
@@ -49,7 +52,7 @@ const Collection = () => {
               {loader
               ? <span className="loader"></span>
               : products.map((product)=>(
-                <div className="product" key={product.id} onClick={()=> navigate(`/products/${product.id}`)}>
+                <div className="product" key={product.id} onClick={()=> user.length > 0 ? navigate(`/products/${product.id}`) : navigate(`/log`)}>
                 <div className="top d-flex">
                   <img src={product.imageUrl} alt="img" />
                   <div className="icon d-flex">
