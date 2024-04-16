@@ -62,7 +62,6 @@
   }
   @media (max-width: 768px) {
     .header .navbar .row .icons {
-      display: none;
     }
     .header .navbar .row .nav-list {
       position: fixed;
