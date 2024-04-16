@@ -10,6 +10,7 @@ const Cart = () => {
     const [products, setProducts] = useState([]);
     const [reFetch, setReFetch] = useState(true);
     const [total, setTotal] = useState(0);
+    const [count, setCount] = useState(0);
     const userToken = useSelector(state => state.user[0].token);
     useEffect(()=>{
       fetch(`${baseUrl}Cart`,{
@@ -22,7 +23,7 @@ const Cart = () => {
       .then(data => {
         setProducts(data.data)
         let productsArray = data.data;
-
+        setCount(data.data.length)
         let totalPrice = 0;
         productsArray.forEach((product) => {
             const price = product.product.price;
@@ -44,6 +45,7 @@ const Cart = () => {
       .then(res => res.json())
       .then(data => setReFetch(!reFetch))
     }
+    count !== 0 ? window.localStorage.setItem("count", count) : window.localStorage.setItem("count", 0);
     return (
       <div className="cart container">
         <span className="circle"></span>

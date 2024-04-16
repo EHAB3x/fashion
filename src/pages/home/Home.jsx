@@ -15,18 +15,18 @@ const Home = () => {
   const user = JSON.parse(window.localStorage.getItem("user"))?.data;
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
+  const storedCount = window.localStorage.getItem("count");
   useEffect(() => {
     if (user) {
       dispatch(addUser(user));
     }
-  }, [dispatch, user]);
-
+    setCount(storedCount);
+  }, [dispatch, user, storedCount]);
   console.log(count);
-  
   return (
     <>
       <header className="header">
-        <Navbar/>
+        <Navbar count={count}/>
         <Hero />
       </header>
       <Collection />

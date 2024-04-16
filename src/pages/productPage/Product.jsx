@@ -26,9 +26,14 @@ const Product = () => {
     },[productID])
 
     const addToCart = ()=>{
-      let value;
-      quantity >= stockQuantity ? value = quantity  - stockQuantity : value = stockQuantity - quantity;
-      fetch(`${baseUrl}Product/${productID}/${value}`,{
+      fetch(`${baseUrl}Cart/addtocart/${productID}`,{
+        method:"post",
+        headers: new Headers({
+          'Authorization': `Bearer ${userToken}` // Potential typo here
+        })
+      });
+      
+      fetch(`${baseUrl}Product/${productID}/${quantity}`,{
         method:"put",
         headers: new Headers({
           'Authorization': `Berar +${userToken}`
