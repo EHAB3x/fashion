@@ -26,7 +26,7 @@ const Log = () => {
   const[loginPassword, setLoginPassword] = useState('');
   const navigate = useNavigate();
 
-  const {login} = useAuth();
+  const {login, user} = useAuth();
 
 
 
@@ -63,6 +63,7 @@ useEffect(()=>{
     });
   });
 },[]);
+
 
 const handleRegister = (e)=>{
   e.preventDefault();
@@ -193,6 +194,15 @@ const handleLogin = (e)=>{
     })
   }
 }
+  useEffect(()=>{
+    if (user !== null) {
+      navigate("/")
+    }
+  },[user,navigate])
+
+  if (user !== null) {
+    return null;
+  }
 
   return (
     <div className="user-form">

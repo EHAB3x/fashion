@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import Blog from "../../components/blog/Blog";
 import Collection from "../../components/collection/Collection";
 import Footer from "../../components/footer/Footer";

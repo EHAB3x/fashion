@@ -29,7 +29,16 @@ const Product = () => {
           'Authorization': `Bearer ${user.token}` // Potential typo here
         })
       });
-      
+    }
+
+    useEffect(()=>{
+      if (user === null) {
+        navigate("/")
+      }
+    },[user,navigate])
+  
+    if (user === null) {
+      return null;
     }
   return (
     <div className="productPage">

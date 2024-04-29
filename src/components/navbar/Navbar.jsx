@@ -43,9 +43,11 @@ const Navbar = ({count}) => {
             <div className="icon d-flex">
               <CiSearch />
             </div>
-            <div className="icon user-icon d-flex">
-              <Link to={"/log"}><CiUser /></Link>
-            </div>
+            {!user && 
+              <div className="icon user-icon d-flex">
+                <Link to={"/log"}><CiUser /></Link>
+              </div>
+            }
             <div className="icon d-flex" onClick={()=> user ? navigate('/cart') : navigate(`/log`) }>
               <IoCartOutline />
               <p className="class-btn">{count}</p>

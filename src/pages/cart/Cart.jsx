@@ -47,6 +47,16 @@ const Cart = () => {
       .then(() => setReFetch(!reFetch))
     }
     count !== 0 ? window.localStorage.setItem("count", count) : window.localStorage.setItem("count", 0);
+
+    useEffect(()=>{
+      if (user === null) {
+        navigate("/")
+      }
+    },[user,navigate])
+  
+    if (user === null) {
+      return null;
+    }
     return (
       <div className="cart container">
         <span className="circle"></span>
