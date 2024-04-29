@@ -23,7 +23,6 @@ const Footer = () => {
             </div>
           <p className="color">
             Copyrights 2024 <br />
-            @Belal khalil
           </p>
         </div>
         <div className="col">
@@ -56,15 +55,15 @@ const Footer = () => {
             <h4>Contact Us</h4>
             <div className="d-flex">
               <div className="icon"><FaLocationDot /></div>
-              <span>123 Street Trafford, London, UK</span>
+              <span>123 Tanta university, Gharbeia, EG</span>
             </div>
             <div className="d-flex">
               <div className="icon"><IoMdMail /></div>
-              <span>info@sitename.com</span>
+              <span>belal1236@gmail.com</span>
             </div>
             <div className="d-flex">
               <div className="icon"><FaPhone /></div>
-              <span>+456 789 789 001</span>
+              <span>+0201007032145</span>
             </div>
           </div>
         </div>

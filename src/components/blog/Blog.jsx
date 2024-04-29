@@ -20,7 +20,7 @@ const Blog = () => {
             <h4>
               Lorem Ispum is a placeholder text commomly used as a free text.
             </h4>
-            <span>10 January 2021</span>
+            <span>10 January 2024</span>
           </div>
         </div>
         <div className="col">
@@ -32,7 +32,7 @@ const Blog = () => {
             <h4>
               Lorem Ispum is a placeholder text commomly used as a free text.
             </h4>
-            <span>10 January 2021</span>
+            <span>10 January 2024</span>
           </div>
         </div>
         <div className="col">
@@ -44,7 +44,7 @@ const Blog = () => {
             <h4>
               Lorem Ispum is a placeholder text commomly used as a free text.
             </h4>
-            <span>10 January 2021</span>
+            <span>10 January 2024</span>
           </div>
         </div>
       </div>

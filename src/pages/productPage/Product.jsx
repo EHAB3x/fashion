@@ -11,6 +11,7 @@ import { useAuth } from "../../context/AuthContext";
 const Product = () => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
+    const [loading, setLoading] = useState(false)
     const {user} = useAuth();
     const navigate = useNavigate();
     document.documentElement.scrollTop = 0;
@@ -23,12 +24,17 @@ const Product = () => {
     },[productID])
 
     const addToCart = ()=>{
+      setLoading(true)
       fetch(`${baseUrl}Cart/addtocart/${productID}`,{
         method:"post",
         headers: new Headers({
           'Authorization': `Bearer ${user.token}` // Potential typo here
         })
-      });
+      }).then(()=> {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
+      })
     }
 
     useEffect(()=>{
@@ -75,7 +81,7 @@ const Product = () => {
               />
             </span>
           </div>
-          <button onClick={()=>addToCart()}>Add to Cart</button>
+          <button onClick={()=>addToCart()}>{!loading ? "Add to Cart" : "Item added successfully"}</button>
         </div>
     </div>
   )

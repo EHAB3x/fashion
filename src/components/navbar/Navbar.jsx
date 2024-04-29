@@ -79,7 +79,7 @@ const Navbar = () => {
             }
             {user && 
               <div className="icon user-icon d-flex">
-                <p>
+                <p style={{display:"flex"}}>
                   <RxAvatar onClick={()=>setShowDetails(!showDetails)}/>
                   {showDetails && <UserDetails/>}
                 </p>
