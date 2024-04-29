@@ -18,7 +18,7 @@ const Navbar = () => {
   const [showDetails, setShowDetails] = useState(false);
   // add count API
   useEffect(()=>{
-    user !== null && fetchCount()
+    user !== null ? fetchCount() : setCount(0)
   },[user])
   useEffect(()=>{
     const navList = document.querySelector(".nav-list");
@@ -58,11 +58,11 @@ const Navbar = () => {
               <img className="photo" src={logo} alt="" />
             </div>
           <div className="nav-list d-flex">
-            <a href="#">Home</a>
-            <a href="#collection">Shop</a>
-            <a href="#">Pages</a>
-            <a href="#">About Us</a>
-            <a href="">Lookups</a>
+          <Link to="/">Home</Link> {/* Use Link component */}
+          <Link to="/#collection">Shop</Link> {/* Adjust href to to */}
+          <Link to="/">Pages</Link> {/* Use Link component */}
+          <Link to="/">About Us</Link> {/* Use Link component */}
+          <Link to="/">Lookups</Link> {/* Use Link component */}
             <div className="close">
               <IoIosClose />
             </div>
