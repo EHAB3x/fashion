@@ -7,7 +7,6 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import axios from 'axios';
 import baseUrl from '../../variables/variables';
 // eslint-disable-next-line react/prop-types
 const Navbar = () => {
@@ -17,7 +16,7 @@ const Navbar = () => {
   // add count API
   useEffect(()=>{
     user !== null && fetchCount()
-  },[])
+  },[user])
   useEffect(()=>{
     const navList = document.querySelector(".nav-list");
     document.querySelector(".hamburger").onclick = () => {
@@ -41,6 +40,14 @@ const Navbar = () => {
     setCount(data.data)
 
   }
+
+  useEffect(()=>{
+    let search = document.querySelector(".icon__search");
+    let overlay = document.querySelector(".search");
+    search.addEventListener("click",()=>{
+      overlay.classList.add("show__search")
+    })
+  })
   return (
     <nav className="navbar">
         <div className="row container d-flex">
@@ -59,7 +66,7 @@ const Navbar = () => {
           </div>
 
         <div className="icons d-flex">
-            <div className="icon d-flex">
+            <div className="icon icon__search d-flex">
               <CiSearch />
             </div>
             {!user && 
