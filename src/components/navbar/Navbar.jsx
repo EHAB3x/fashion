@@ -6,10 +6,12 @@ import { CiSearch, CiUser } from "react-icons/ci";
 import { BiMenuAltRight } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useAuth } from '../../context/AuthContext';
+// eslint-disable-next-line react/prop-types
 const Navbar = ({count}) => {
   const navigate = useNavigate();
-  const user = useSelector(state => state.user);
+  const {user} = useAuth();
+  // add count API
   useEffect(()=>{
     const navList = document.querySelector(".nav-list");
     document.querySelector(".hamburger").onclick = () => {
@@ -44,7 +46,7 @@ const Navbar = ({count}) => {
             <div className="icon user-icon d-flex">
               <Link to={"/log"}><CiUser /></Link>
             </div>
-            <div className="icon d-flex" onClick={()=> user.length > 0 ? navigate('/cart') : navigate(`/log`) }>
+            <div className="icon d-flex" onClick={()=> user ? navigate('/cart') : navigate(`/log`) }>
               <IoCartOutline />
               <p className="class-btn">{count}</p>
             </div>

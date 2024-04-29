@@ -2,21 +2,22 @@ import { useNavigate } from "react-router-dom"
 import "./cart.css"
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import baseUrl from "../../variables/variables";
 import { IoClose } from "react-icons/io5";
+import { useAuth } from "../../context/AuthContext";
+
 const Cart = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [reFetch, setReFetch] = useState(true);
     const [total, setTotal] = useState(0);
     const [count, setCount] = useState(0);
-    const userToken = useSelector(state => state.user[0].token);
+    const {user} = useAuth();
     useEffect(()=>{
       fetch(`${baseUrl}Cart`,{
         method:"get",
         headers : new Headers({
-          'Authorization' : 'Bearer ' + userToken
+          'Authorization' : 'Bearer ' + user.token
         })
       })
       .then(res => res.json())
@@ -34,16 +35,16 @@ const Cart = () => {
 
 
       })
-    },[userToken, reFetch, total])
+    },[user, reFetch, total])
     function deleteItem(productId){
       fetch(`${baseUrl}Cart/removefromcart/${productId}`,{
         method: "post", 
         headers: new Headers({
-          'Authorization': `Bearer ${userToken}`
+          'Authorization': `Bearer ${user.token}`
         })
       })
       .then(res => res.json())
-      .then(data => setReFetch(!reFetch))
+      .then(() => setReFetch(!reFetch))
     }
     count !== 0 ? window.localStorage.setItem("count", count) : window.localStorage.setItem("count", 0);
     return (

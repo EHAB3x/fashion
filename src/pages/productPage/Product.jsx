@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
 import baseUrl from "../../variables/variables";
+import { useAuth } from "../../context/AuthContext";
 
 
 const Product = () => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [stockQuantity, setStockQuantity] = useState(0);
-    const userToken = useSelector(state => state.user[0].token);
+    const {user} = useAuth();
     const navigate = useNavigate();
     document.documentElement.scrollTop = 0;
     const { productID } = useParams();
@@ -20,8 +19,6 @@ const Product = () => {
       axios.get(`${baseUrl}Product/GetProduct/${productID}`)
       .then(res=> {
         setProduct(res.data.data)
-        setQuantity(res.data.data.stockQuantity);
-        setStockQuantity(res.data.data.stockQuantity);
       });
     },[productID])
 
@@ -29,16 +26,10 @@ const Product = () => {
       fetch(`${baseUrl}Cart/addtocart/${productID}`,{
         method:"post",
         headers: new Headers({
-          'Authorization': `Bearer ${userToken}` // Potential typo here
+          'Authorization': `Bearer ${user.token}` // Potential typo here
         })
       });
       
-      fetch(`${baseUrl}Product/${productID}/${quantity}`,{
-        method:"put",
-        headers: new Headers({
-          'Authorization': `Berar +${userToken}`
-        })
-      });
     }
   return (
     <div className="productPage">

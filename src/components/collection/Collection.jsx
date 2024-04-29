@@ -4,14 +4,14 @@ import axios from "axios";
 import { CiHeart, CiStar } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../../variables/variables";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../context/AuthContext";
 
 const Collection = () => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState("");
     const [loader, setLoader] = useState(true);
-    const user = useSelector(state => state.user);
+    const {user} = useAuth();
     const navigate = useNavigate();
     useEffect(()=>{
         axios.get(`${baseUrl}/Category`)
@@ -52,7 +52,7 @@ const Collection = () => {
               {loader
               ? <span className="loader"></span>
               : products.map((product)=>(
-                <div className="product" key={product.id} onClick={()=> user.length > 0 ? navigate(`/products/${product.id}`) : navigate(`/log`)}>
+                <div className="product" key={product.id} onClick={()=> user ? navigate(`/products/${product.id}`) : navigate(`/log`)}>
                 <div className="top d-flex">
                   <img src={product.imageUrl} alt="img" />
                   <div className="icon d-flex">

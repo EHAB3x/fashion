@@ -13,9 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../RTK/Slices/userSlice";
 import baseUrl from "../../variables/variables";
+import { useAuth } from "../../context/AuthContext";
 const Log = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -26,7 +25,8 @@ const Log = () => {
   const[loginEmail, setLoginEmail] = useState('');
   const[loginPassword, setLoginPassword] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const {login} = useAuth();
 
 
 
@@ -101,8 +101,7 @@ const handleRegister = (e)=>{
       email,
       password
     }).then(res => {
-      dispatch(addUser(res.data))
-      window.localStorage.setItem("user", JSON.stringify(res));
+      login(res.data)
       setFirstName('')
       setLastName('')
       setUsername('')
@@ -161,8 +160,7 @@ const handleLogin = (e)=>{
       email: loginEmail,
       password: loginPassword,
     }).then(res => {
-      window.localStorage.setItem("user", JSON.stringify(res));
-      dispatch(addUser(res.data))
+      login(res.data)
       setLoginEmail('')
       setLoginPassword('')
       toast(`Welcome, ${res.data.userName}`, {
