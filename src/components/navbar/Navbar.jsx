@@ -4,15 +4,18 @@ import { IoIosClose } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { BiMenuAltRight } from "react-icons/bi";
+import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import baseUrl from '../../variables/variables';
+import UserDetails from '../userDetails/UserDetails';
 // eslint-disable-next-line react/prop-types
 const Navbar = () => {
   const navigate = useNavigate();
   const {user} = useAuth();
   const [count, setCount] = useState(0);
+  const [showDetails, setShowDetails] = useState(false);
   // add count API
   useEffect(()=>{
     user !== null && fetchCount()
@@ -72,6 +75,14 @@ const Navbar = () => {
             {!user && 
               <div className="icon user-icon d-flex">
                 <Link to={"/log"}><CiUser /></Link>
+              </div>
+            }
+            {user && 
+              <div className="icon user-icon d-flex">
+                <p>
+                  <RxAvatar onClick={()=>setShowDetails(!showDetails)}/>
+                  {showDetails && <UserDetails/>}
+                </p>
               </div>
             }
             <div className="icon d-flex" onClick={()=> user ? navigate('/cart') : navigate(`/log`) }>
