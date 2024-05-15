@@ -5,6 +5,9 @@ import Log from './pages/log methods/Log'
 import Product from './pages/productPage/Product'
 import Footer from './components/footer/Footer'
 import Cart from './pages/cart/Cart'
+import Dashboard from './pages/dashboard/Dashboard'
+import ViewProducts from './pages/dashboard/viewProducts/ViewProducts'
+import AddProducts from './pages/dashboard/addProduct/AddProducts'
 function App() {
   return (
     <Routes>
@@ -22,6 +25,12 @@ function App() {
         <Footer />
       </>
       } />
+
+      <Route path='/dashboard' element={<Dashboard />}/>
+
+      <Route path='/dashboard/products' element={<ViewProducts />}/>
+
+      <Route path='/dashboard/products/add' element={<AddProducts />}/>
     </Routes>
   )
 }

@@ -2,6 +2,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useState } from 'react'; // Import useState hook
 import './userDetails.css';
 import { CiMail, CiUser, CiLogin } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
 
 const UserDetails = () => {
     const { user, logout } = useAuth();
@@ -32,6 +33,10 @@ const UserDetails = () => {
                 <CiLogin />
                 <p>{loggingOut ? 'Logging out...' : 'Log Out'}</p>
             </div>
+            <div className="details__field">
+                <Link to="/dashboard">Dashboard</Link>
+            </div>
+
         </div>
     );
 };

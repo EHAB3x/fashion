@@ -58,11 +58,11 @@ const Navbar = () => {
               <img className="photo" src={logo} alt="" />
             </div>
           <div className="nav-list d-flex">
-          <Link to="/">Home</Link> {/* Use Link component */}
-          <Link to="/#collection">Shop</Link> {/* Adjust href to to */}
-          <Link to="/">Pages</Link> {/* Use Link component */}
-          <Link to="/">About Us</Link> {/* Use Link component */}
-          <Link to="/">Lookups</Link> {/* Use Link component */}
+          <Link to="/">Home</Link> 
+          <Link to="/#collection">Shop</Link> 
+          <Link to="/">Pages</Link>
+          <Link to="/">About Us</Link> 
+          <Link to="/">Lookups</Link> 
             <div className="close">
               <IoIosClose />
             </div>
